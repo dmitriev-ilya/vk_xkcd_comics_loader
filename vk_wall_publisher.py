@@ -20,7 +20,7 @@ def publish_vk_wall_post(group_id, access_token, image, text):
             "photo": file,
         }
         upload_response = requests.post(upload_url, files=files)
-        upload_response.raise_for_status()
+    upload_response.raise_for_status()
     upload_response = upload_response.json()
 
     save_wall_method_data = {
