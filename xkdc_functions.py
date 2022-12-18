@@ -1,10 +1,11 @@
 import requests
-from urllib.parse import urlparse
-from main_loader_functions import load_picture
+from urllib.parse import urlparse, unquote
+from main_loader_functions import download_picture
+import os
 import argparse
 
 
-def get_xkcd_response(comics_num=None):
+def get_xkcd_info(comics_num=None):
     comics_url = "https://xkcd.com/info.0.json"
     if comics_num:
         comics_url = f"https://xkcd.com/{comics_num}/info.0.json"
@@ -14,13 +15,13 @@ def get_xkcd_response(comics_num=None):
 
 
 def get_xkcd_image_name(image_url):
-    path = urlparse(image_url).path
-    return path.split("/")[-1]
+    path = unquote(urlparse(image_url).path)
+    return os.path.split(path)[1]
 
 
-def load_xkdc_image(image_url):
+def download_xkdc_image(image_url):
     image_name = get_xkcd_image_name(image_url)
-    load_picture(image_url, image_name)
+    download_picture(image_url, image_name)
 
 
 if __name__ == "__main__":
@@ -35,5 +36,5 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    image_url = get_xkcd_response(args.comics_num)["img"]
-    load_xkdc_image(image_url)
+    image_url = get_xkcd_info(args.comics_num)["img"]
+    download_xkdc_image(image_url)
