@@ -24,19 +24,3 @@ def download_xkdc_image(image_url):
     response.raise_for_status()
     with open(image_name, "wb") as file:
         file.write(response.content)
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="""Скрипт скачивает комикс с сайта https://xkcd.com"""
-    )
-    parser.add_argument(
-        "-c",
-        "--comics_num",
-        help="номер комикса, по умолчанию - последний",
-        default=None,
-    )
-    args = parser.parse_args()
-
-    image_url = get_xkcd_info(args.comics_num)["img"]
-    download_xkdc_image(image_url)

@@ -1,5 +1,5 @@
 from xkdc_functions import get_xkcd_info, get_xkcd_image_name, download_xkdc_image
-from vk_wall_publisher import publish_vk_wall_post
+from vk_wall_publisher_functions import publish_vk_wall_post
 import random
 from environs import Env
 import os

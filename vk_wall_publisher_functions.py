@@ -49,31 +49,3 @@ def publish_vk_wall_post(group_id, access_token, image, text):
     }
     post_method_response = requests.get(post_method_url, params=post_method_params)
     post_method_response.raise_for_status()
-
-
-if __name__ == "__main__":
-    env = Env()
-    env.read_env()
-
-    group_id = env.int("VK_GROUP_ID")
-    access_token = env.str("VK_APP_ACCESS_TOKEN")
-
-    parser = argparse.ArgumentParser(
-        description="""Скрипт позволяет публиковать изображения с подписью на /
-        стене группы Вконтакте.
-        Требует VK_APP_ACCESS_TOKEN и VK_GROUP_ID в .env"""
-    )
-    parser.add_argument(
-        "-i",
-        "--image_path",
-        help="путь к изображению",
-    )
-    parser.add_argument(
-        "-t",
-        "--text",
-        help="текст для поста",
-        default="",
-    )
-    args = parser.parse_args()
-
-    publish_vk_wall_post(group_id, access_token, args.image_path, args.text)
