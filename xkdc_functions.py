@@ -1,6 +1,5 @@
 import requests
 from urllib.parse import urlparse, unquote
-from main_loader_functions import download_picture
 import os
 import argparse
 
@@ -21,7 +20,10 @@ def get_xkcd_image_name(image_url):
 
 def download_xkdc_image(image_url):
     image_name = get_xkcd_image_name(image_url)
-    download_picture(image_url, image_name)
+    response = requests.get(image_url)
+    response.raise_for_status()
+    with open(image_name, "wb") as file:
+        file.write(response.content)
 
 
 if __name__ == "__main__":
