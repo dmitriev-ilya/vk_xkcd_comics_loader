@@ -4,7 +4,7 @@ import os
 import argparse
 
 
-def get_xkcd_info(comics_num=None):
+def get_xkcd_comics(comics_num=None):
     comics_url = "https://xkcd.com/info.0.json"
     if comics_num:
         comics_url = f"https://xkcd.com/{comics_num}/info.0.json"
