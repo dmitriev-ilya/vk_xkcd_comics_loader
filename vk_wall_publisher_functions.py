@@ -18,7 +18,8 @@ def get_upload_url(group_id, access_token):
     }
     upload_server_url = "https://api.vk.com/method/photos.getWallUploadServer"
     upload_server_response = requests.get(
-        upload_server_url, params=upload_server_params
+        upload_server_url,
+        params=upload_server_params
     )
     upload_server_response.raise_for_status()
     catch_vk_api_exception(upload_server_response)
