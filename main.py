@@ -1,17 +1,13 @@
-from xkdc_functions import (
-    get_xkcd_comics,
-    get_xkcd_image_name,
-    download_xkdc_image
-)
-from vk_wall_publisher_functions import (
-    get_upload_url,
-    upload_image_on_vk_server,
-    save_image_in_vk_group,
-    publish_vk_wall_post,
-)
-import random
-from environs import Env
 import os
+import random
+
+from environs import Env
+
+from vk_wall_publisher_functions import (get_upload_url, publish_vk_wall_post,
+                                         save_image_in_vk_group,
+                                         upload_image_on_vk_server)
+from xkdc_functions import (download_xkdc_image, get_xkcd_comics,
+                            get_xkcd_image_name)
 
 
 if __name__ == "__main__":

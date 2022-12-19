@@ -1,7 +1,8 @@
-import requests
-from urllib.parse import urlparse, unquote
-import os
 import argparse
+import os
+from urllib.parse import unquote, urlparse
+
+import requests
 
 
 def get_xkcd_comics(comics_num=None):
