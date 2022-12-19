@@ -19,16 +19,16 @@ if __name__ == "__main__":
     try:
         total_xkcd = get_xkcd_comics()["num"]
         comics_number = random.randint(1, total_xkcd)
-        xkcd_info = get_xkcd_comics(comics_number)
+        xkcd_comics = get_xkcd_comics(comics_number)
 
-        image_url = xkcd_info["img"]
+        image_url = xkcd_comics["img"]
         image_name = get_xkcd_image_name(image_url)
-        post_text = xkcd_info["alt"]
+        post_text = xkcd_comics["alt"]
         download_xkdc_image(image_url)
 
         upload_url = get_upload_url(group_id, access_token)
-        upload_info = upload_image_on_vk_server(upload_url, image_name)
-        save_method_info = save_image_in_vk_group(group_id, access_token, upload_info)
-        publish_vk_wall_post(group_id, access_token, save_method_info, post_text)
+        upload_params = upload_image_on_vk_server(upload_url, image_name)
+        save_method_params = save_image_in_vk_group(group_id, access_token, upload_params)
+        publish_vk_wall_post(group_id, access_token, save_method_params, post_text)
     finally:
         os.remove(image_name)
