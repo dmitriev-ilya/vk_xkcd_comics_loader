@@ -1,4 +1,8 @@
-from xkdc_functions import get_xkcd_comics, get_xkcd_image_name, download_xkdc_image
+from xkdc_functions import (
+    get_xkcd_comics,
+    get_xkcd_image_name,
+    download_xkdc_image
+)
 from vk_wall_publisher_functions import (
     get_upload_url,
     upload_image_on_vk_server,
@@ -27,8 +31,25 @@ if __name__ == "__main__":
         download_xkdc_image(image_url)
 
         upload_url = get_upload_url(group_id, access_token)
-        upload_params = upload_image_on_vk_server(upload_url, image_name)
-        save_method_params = save_image_in_vk_group(group_id, access_token, upload_params)
-        publish_vk_wall_post(group_id, access_token, save_method_params, post_text)
+
+        (uploaded_photo_url,
+        upload_server_url,
+        upload_hash) = upload_image_on_vk_server(upload_url, image_name)
+
+        photo_owner_id, photo_id = save_image_in_vk_group(
+            group_id,
+            access_token,
+            uploaded_photo_url,
+            upload_server_url,
+            upload_hash
+        )
+
+        publish_vk_wall_post(
+            group_id,
+            access_token,
+            photo_owner_id,
+            photo_id,
+            post_text
+        )
     finally:
         os.remove(image_name)
