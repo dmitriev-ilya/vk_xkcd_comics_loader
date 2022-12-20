@@ -37,10 +37,10 @@ def upload_image_on_vk_server(upload_url, image):
     upload_response.raise_for_status()
     catch_vk_api_exception(upload_response)
 
-    upload_params = upload_response.json()
-    uploaded_photo_url = upload_params["photo"]
-    upload_server_url = upload_params["server"]
-    upload_hash = upload_params["hash"]
+    upload_metadata = upload_response.json()
+    uploaded_photo_url = upload_metadata["photo"]
+    upload_server_url = upload_metadata["server"]
+    upload_hash = upload_metadata["hash"]
     return uploaded_photo_url, upload_server_url, upload_hash
 
 
@@ -48,7 +48,7 @@ def save_image_in_vk_group(
     group_id, access_token,
     uploaded_photo_url, upload_server_url, upload_hash
     ):
-    save_method_sending = {
+    save_method_params = {
         "group_id": group_id,
         "photo": uploaded_photo_url,
         "server": upload_server_url,
@@ -58,14 +58,15 @@ def save_image_in_vk_group(
     }
     save_wall_method_url = "https://api.vk.com/method/photos.saveWallPhoto"
     save_wall_method_response = requests.post(
-        save_wall_method_url, data=save_method_sending
+        save_wall_method_url,
+        data=save_method_params
     )
     save_wall_method_response.raise_for_status()
     catch_vk_api_exception(save_wall_method_response)
 
-    save_method_params = save_wall_method_response.json()["response"][0]
-    photo_owner_id = save_method_params['owner_id']
-    photo_id = save_method_params['id']
+    response_metadata = save_wall_method_response.json()["response"][0]
+    photo_owner_id = response_metadata['owner_id']
+    photo_id = response_metadata['id']
     return photo_owner_id, photo_id
 
 
