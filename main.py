@@ -3,11 +3,13 @@ import random
 
 from environs import Env
 
-from vk_wall_publisher_functions import (get_upload_url, publish_vk_wall_post,
-                                         save_image_in_vk_group,
-                                         upload_image_on_vk_server)
-from xkdc_functions import (download_xkdc_image, get_xkcd_comics,
-                            get_xkcd_image_name)
+from vk_wall_publisher_functions import get_upload_url
+from vk_wall_publisher_functions import publish_vk_wall_post
+from vk_wall_publisher_functions import save_image_in_vk_group
+from vk_wall_publisher_functions import upload_image_on_vk_server
+from xkdc_functions import download_xkdc_image
+from xkdc_functions import get_xkcd_comics
+from xkdc_functions import get_xkcd_image_name
 
 
 if __name__ == "__main__":

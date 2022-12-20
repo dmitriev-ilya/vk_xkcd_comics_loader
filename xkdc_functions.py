@@ -1,6 +1,6 @@
-import argparse
 import os
-from urllib.parse import unquote, urlparse
+from urllib.parse import unquote
+from urllib.parse import urlparse
 
 import requests
 
